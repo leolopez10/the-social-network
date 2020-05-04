@@ -6,11 +6,14 @@ const routes = require('./routes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Init Middleware
+app.use(express.json({ extended: false }))
+
+
 app.get('/', (req, res) => res.send('API Running'))
 
 // API Routes
 app.use(routes);
-
 
 //Database Connection
 mongoose.connect((process.env.MONGODB_URI || process.env.DATABASE), {

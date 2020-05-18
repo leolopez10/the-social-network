@@ -8,7 +8,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Init Middleware
-app.use(express).urlencoded({ extended: true });
 app.use(express.json({ extended: false }));
 
 // Here for develpment

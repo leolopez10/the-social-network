@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express).urlencoded({ extended: true });
 app.use(express.json({ extended: false }));
 
-app.get('/', (req, res) => res.send('API Running'));
+// app.get('/', (req, res) => res.send('API Running'));
 
 // Serve up static assets (for heroku)
 if (process.env.NODE_ENV === 'production') {

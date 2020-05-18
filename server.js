@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -10,20 +11,20 @@ const PORT = process.env.PORT || 5000;
 app.use(express).urlencoded({ extended: true });
 app.use(express.json({ extended: false }));
 
-app.get('/', (req, res) => res.send('API Running'));
-
-// Serve up static assets (for heroku)
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-}
+// Here for develpment
+// app.get('/', (req, res) => res.send('API Running'));
 
 // API Routes
 app.use(routes);
 
-// Send every other request to the React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/build/index.html'));
-});
+// Serve up static assets (for heroku)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  // Send every other request to the React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+  });
+}
 
 //Database Connection
 mongoose

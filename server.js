@@ -15,15 +15,15 @@ app.get('/', (req, res) => res.send('API Running'));
 // Serve up static assets (for heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-  // Send every other request to the React app
-  const path = require('path');
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-  });
 }
 
 // API Routes
 app.use(routes);
+
+// Send every other request to the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
 
 //Database Connection
 mongoose

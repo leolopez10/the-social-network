@@ -4,13 +4,11 @@
   "description": "Social Network for Developers",
   "main": "server.js",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
-    "install": "cd client && npm install",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix && npm run build --prefix client"
   },
   "author": "Leo Lopez",
   "license": "ISC",
@@ -23,8 +21,7 @@
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.11",
-    "request": "^2.88.2",
-    "concurrently": "^5.2.0"
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
